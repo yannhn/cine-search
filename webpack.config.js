@@ -1,5 +1,8 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+// const Dotenv = require("dotenv-webpack");
+// const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "development",
@@ -38,6 +41,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "src/index.html", to: "index.html" }],
     }),
+    new Dotenv(),
   ],
   output: {
     path: path.resolve(__dirname, "dist"),
