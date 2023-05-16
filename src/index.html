@@ -23,5 +23,39 @@
         </ul>
       </nav>
     </header>
+    <main>
+      <!-- Now Playing section -->
+      <h2 class="text-center text-xl mb-4">NOW PLAYING</h2>
+      <section class="now-playing grid grid-cols-4"></section>
+      <hr class="p-6" />
+
+      <h2 class="text-center text-xl mb-4">SEARCH</h2>
+      <section class="search flex justify-center">
+        <form class="search w-full max-w-sm flex items-center py-2">
+          <input
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-teal-500 mr-3 py-1 px-2"
+            type="text"
+            placeholder="Movie Title"
+            aria-label="Full name"
+          />
+          <button
+            class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+            type="submit"
+          >
+            Search
+          </button>
+          <button
+            class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
+            type="button"
+          >
+            Cancel
+          </button>
+        </form>
+      </section>
+      <hr class="p-6" />
+      <h2 class="text-center text-xl mb-4">Popular</h2>
+      <section class="popular grid grid-cols-4"></section>
+    </main>
+    <footer><h2 class="test-center">Footer placeholder</h2></footer>
   </body>
 </html>
