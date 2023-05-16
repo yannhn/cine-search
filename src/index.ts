@@ -72,6 +72,21 @@ function renderPopularMovies() {
   });
 }
 
+const searchForm = document.querySelector(".search") as HTMLFormElement;
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const searchFormInput = document.querySelector(
+    ".search-input"
+  ) as HTMLInputElement;
+  console.log(searchFormInput.value);
+
+  const searchRadioButtons = document.querySelectorAll('input[type="radio"]');
+  console.log(searchRadioButtons);
+
+  // fetch mit if-Abfrage kombinieren
+});
+
 init(renderTrendingMovies, renderPopularMovies);
 
 function init(...callbacks: any[]) {
