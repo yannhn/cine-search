@@ -19,7 +19,11 @@ export class CreateDOM {
       }
     }
 
-    if (classes !== undefined && Array.isArray(classes)) {
+    if (
+      classes !== undefined &&
+      Array.isArray(classes) &&
+      classes.length !== 0
+    ) {
       element.classList.add(...classes);
     }
 
