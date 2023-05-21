@@ -72,8 +72,15 @@ function renderPopularMovies() {
 
 const searchForm = document.querySelector(".search") as HTMLFormElement;
 
+console.log(window.location.pathname);
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
+
+  const queryString = window.location.search;
+
+  const urlParams = new URLSearchParams(queryString);
+
+  console.log(urlParams);
 
   const searchFormInput = document.querySelector(
     ".search-input"

@@ -48,10 +48,16 @@ module.exports = {
       filename: "index.html",
     }),
     new HtmlWebpackPlugin({
-      template: "./src/searchResults.html",
+      template: "./src/search_results.html",
       inject: true,
       chunks: ["index"],
-      filename: "searchResults.html",
+      filename: "search_results.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/tv_shows.html",
+      inject: true,
+      chunks: ["index"],
+      filename: "tv_shows.html",
     }),
   ],
   output: {
