@@ -10,9 +10,9 @@ const popular = document.querySelector(".popular");
 
 function renderTrendingMovies() {
   api.get("trending/movie/week").then((data) => {
-    console.log(data);
+    // console.log(data);
     data.results.forEach((result: any) => {
-      console.log(result);
+      // console.log(result);
       if (playing instanceof HTMLElement) {
         const movieContainer = dom.createElement(
           "div",
@@ -42,9 +42,7 @@ function renderTrendingMovies() {
 
 function renderPopularMovies() {
   api.get("movie/popular").then((data) => {
-    console.log(data);
     data.results.forEach((result: any) => {
-      console.log(result);
       if (popular instanceof HTMLElement) {
         const movieContainer = dom.createElement(
           "div",
@@ -73,6 +71,7 @@ function renderPopularMovies() {
 }
 
 const searchForm = document.querySelector(".search") as HTMLFormElement;
+
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -81,13 +80,21 @@ searchForm.addEventListener("submit", (event) => {
   ) as HTMLInputElement;
   console.log(searchFormInput.value);
 
+  let searchInput: string = searchFormInput.value;
+  console.log("STRING:", searchInput);
+
   const searchRadioButtons = document.querySelectorAll('input[type="radio"]');
-  console.log(searchRadioButtons);
+  let selectedValue = "";
+  searchRadioButtons.forEach((radioButton) => {
+    if ((radioButton as HTMLInputElement).checked) {
+      selectedValue = (radioButton as HTMLInputElement).value;
+    }
+  });
 
-  // fetch mit if-Abfrage kombinieren
+  api.search(selectedValue, searchInput).then((data) => {
+    console.log(data);
+  });
 });
-
-init(renderTrendingMovies, renderPopularMovies);
 
 function init(...callbacks: any[]) {
   if (document.readyState === "loading") {
@@ -98,3 +105,5 @@ function init(...callbacks: any[]) {
     callbacks.forEach((callback) => callback());
   }
 }
+
+init(renderTrendingMovies, renderPopularMovies);

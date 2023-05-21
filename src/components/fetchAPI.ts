@@ -19,6 +19,18 @@ export class FetchAPI {
     }
   }
 
+  async search(type: string, title: string) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/search/${type}?api_key=${this.API_KEY}&query=${title}&language=us-US`
+      );
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error("GET-Request error", err);
+    }
+  }
+
   async post(url: string, body: string) {
     try {
       const response = await fetch(this.baseUrl + url, {
