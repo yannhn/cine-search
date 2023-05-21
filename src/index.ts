@@ -36,11 +36,19 @@ function renderMultipleItems(url: string, containerClass: string) {
   });
 }
 
-const renderTrendingMvoies = renderMultipleItems(
+const renderTrendingMovies = renderMultipleItems(
   "trending/movie/week",
-  ".now-playing"
+  ".now-playing-movies"
 );
-const renderPopularMovies = renderMultipleItems("movie/popular", ".popular");
+const renderPopularMovies = renderMultipleItems(
+  "movie/popular",
+  ".popular-movies"
+);
+const renderTrendingShows = renderMultipleItems(
+  "trending/tv/week",
+  ".now-playing-shows"
+);
+const renderPopularShows = renderMultipleItems("tv/popular", ".popular-shows");
 
 const searchForm = document.querySelector(".search") as HTMLFormElement;
 searchForm.addEventListener("submit", (event) => {
@@ -77,4 +85,9 @@ function init(...callbacks: any[]) {
   }
 }
 
-init(renderTrendingMvoies, renderPopularMovies);
+init(
+  renderTrendingMovies,
+  renderPopularMovies,
+  renderTrendingShows,
+  renderPopularShows
+);
