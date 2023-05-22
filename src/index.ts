@@ -14,9 +14,7 @@ const global = {
 
 console.log(global.currentPage);
 
-// Highlight active link
 function highlightActiveLink() {
-  // nav links
   const navLinks = document.querySelectorAll(".nav-link");
   console.log(navLinks);
   navLinks.forEach((navLink) => {
@@ -49,13 +47,12 @@ function basicRouting() {
   highlightActiveLink();
 }
 
-basicRouting();
-
 const api = new FetchAPI("https://api.themoviedb.org/3/", process.env.API_KEY);
 const dom = new CreateDOM();
 
 function renderMultipleItems(url: string, containerClass: string) {
   const domContainer = document.querySelector(containerClass);
+  // methods as parameters
   api.get(url).then((data) => {
     data.results.forEach((result: any) => {
       if (domContainer instanceof HTMLElement) {
@@ -98,6 +95,7 @@ async function renderSearchResults() {
 
   if (global.search.type === "movie" || global.search.type === "tv") {
     api.search(global.search.type, global.search.term).then((data) => {
+      console.log("MOVIE/TV - DATA", data);
       data.results.forEach((result: any) => {
         if (domContainer instanceof HTMLElement) {
           const movieContainer = dom.createElement(
@@ -106,8 +104,6 @@ async function renderSearchResults() {
             ["text-center", "m-2"],
             domContainer
           );
-          // dom.createElement("h2", {}, ["text-xl"], movieContainer).textContent =
-          //   result.title;
           dom.createElement(
             "img",
             { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
@@ -115,11 +111,29 @@ async function renderSearchResults() {
             movieContainer
           );
           dom.createElement(
+            "h2",
+            {},
+            ["text-xl"],
+            movieContainer
+          ).textContent = `${
+            global.search.type === "movie" ? result.title : result.name
+          }`;
+          dom.createElement(
+            "h2",
+            {},
+            ["text-xl"],
+            movieContainer
+          ).textContent = `Release: ${
+            global.search.type === "movie"
+              ? result.release_date
+              : result.first_air_date
+          }`;
+          dom.createElement(
             "span",
             {},
             ["text-xl"],
             movieContainer
-          ).textContent = `${result.vote_average} / 10`;
+          ).textContent = `Rating: ${result.vote_average} / 10`;
         }
       });
     });
@@ -172,6 +186,8 @@ async function renderSearchResults() {
   }
 }
 
+const routingSwitch = basicRouting();
+
 const search = renderSearchResults();
 
 const renderTrendingMovies = renderMultipleItems(
@@ -203,72 +219,6 @@ init(
   renderPopularMovies,
   renderTrendingShows,
   renderPopularShows,
-  search
+  search,
+  routingSwitch
 );
-
-// const searchForm = document.querySelector(".search") as HTMLFormElement;
-// searchForm.addEventListener("submit", (event) => {
-//   // event.preventDefault();
-
-//   const searchFormInput = document.querySelector(
-//     ".search-input"
-//   ) as HTMLInputElement;
-
-//   let searchInput: string = searchFormInput.value;
-
-//   const searchRadioButtons = document.querySelectorAll('input[type="radio"]');
-//   let selectedValue = "";
-//   searchRadioButtons.forEach((radioButton) => {
-//     if ((radioButton as HTMLInputElement).checked) {
-//       selectedValue = (radioButton as HTMLInputElement).value;
-//     }
-//   });
-
-//   api.search(selectedValue, searchInput).then((data) => {
-//     console.log(data);
-//   });
-// });
-
-// const domContainer = document.querySelector(".test-container");
-
-// api.search(global.search.type, global.search.term).then((data) => {
-//   console.log(data);
-//   data.results.forEach((result: any) => {
-//     if (domContainer instanceof HTMLElement) {
-//       const movieContainer = dom.createElement(
-//         "div",
-//         { "data-id": result.id },
-//         ["text-center", "m-2"],
-//         domContainer
-//       );
-//       // dom.createElement("h2", {}, ["text-xl"], movieContainer).textContent =
-//       //   result.title;
-//       dom.createElement(
-//         "img",
-//         { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
-//         ["object-contain", "h-48", "w-96"],
-//         movieContainer
-//       );
-//       dom.createElement(
-//         "span",
-//         {},
-//         ["text-xl"],
-//         movieContainer
-//       ).textContent = `${result.vote_average} / 10`;
-//     }
-//   });
-// });
-
-// async function search() {
-//   const queryString = window.location.search;
-//   const url = new URLSearchParams(queryString);
-
-//   global.search.type = url.get("type");
-//   global.search.term = url.get("search-query");
-
-//   if (global.search.term !== "" && global.search.term !== null) {
-//     // @todo - make request and display results
-//   } else {
-//     alert("PLEASE ENTER A SEARCH TERM");
-//   }
-// }
