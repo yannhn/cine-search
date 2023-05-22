@@ -13,12 +13,12 @@
     >
       <h1 class="text-xl">LOGO PLACEHOLDER</h1>
       <nav>
-        <ul class="flex gap-12">
+        <ul class="flex gap-12 items-center">
           <li>
-            <a href="./">Movies</a>
+            <a class="nav-link" href="/">Movies</a>
           </li>
           <li>
-            <a href="./tv_shows.html">Tv Shows</a>
+            <a class="nav-link" href="/tv_shows.html">Tv Shows</a>
           </li>
         </ul>
       </nav>
@@ -26,7 +26,9 @@
     <main>
       <!-- Now Playing section -->
       <h2 class="text-center text-xl mb-4">TRENDING</h2>
-      <section class="now-playing-shows grid grid-cols-4"></section>
+      <section
+        class="now-playing-shows grid grid-cols-2 md:grid-cols-4"
+      ></section>
       <hr class="p-6" />
 
       <h2 class="text-center text-xl mb-4">SEARCH</h2>
@@ -42,26 +44,21 @@
                 <input
                   type="radio"
                   id="search-movie"
-                  name="search-query"
+                  name="type"
                   value="movie"
                   checked
                 />
               </li>
               <li>
                 <label for="search-show">Show</label>
-                <input
-                  type="radio"
-                  id="search-show"
-                  name="search-query"
-                  value="tv"
-                />
+                <input type="radio" id="search-show" name="type" value="tv" />
               </li>
               <li>
                 <label for="search-person">Person</label>
                 <input
                   type="radio"
                   id="search-person"
-                  name="search-query"
+                  name="type"
                   value="person"
                 />
               </li>
@@ -70,7 +67,7 @@
                 <input
                   type="radio"
                   id="search-keyword"
-                  name="search-query"
+                  name="type"
                   value="keyword"
                 />
               </li>
@@ -79,10 +76,10 @@
           <input
             class="search-input bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-teal-500 mr-3 py-1 px-2"
             type="text"
+            name="search-query"
             placeholder="Title"
             aria-label="Full name"
           />
-
           <div class="flex">
             <button
               class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
@@ -101,7 +98,7 @@
       </section>
       <hr class="p-6" />
       <h2 class="text-center text-xl mb-4">Popular</h2>
-      <section class="popular-shows grid grid-cols-4"></section>
+      <section class="popular-shows grid grid-cols-2 md:grid-cols-4"></section>
     </main>
     <footer><h2 class="test-center">Footer placeholder</h2></footer>
   </body>
