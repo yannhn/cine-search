@@ -10,7 +10,7 @@ export class FetchAPI {
   async get(url: string) {
     try {
       const response = await fetch(
-        `${this.baseUrl}${url}?api_key=${this.API_KEY}`
+        `${this.baseUrl}${url}?api_key=${this.API_KEY}&language=us-US`
       );
       const data = await response.json();
       return data;
