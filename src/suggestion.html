@@ -27,10 +27,23 @@
       </nav>
     </header>
     <main>
-      <a class="underline" href="/tv_shows.html">Back to shows</a>
-      <section class="tv-show-details-container"></section>
-      <section class="similar">
-        <h2>SIMILAR Shows</h2>
+      <section class="random m-4">
+        <h2 class="text-center">Do not know what to watch?</h2>
+        <form action="./suggestion.html" class="filter-form">
+          <label for="">Movie</label>
+          <input type="radio" name="type" value="movie" />
+          <label for="">Shows</label>
+          <input type="radio" name="type" value="tv" />
+          <div class="genre-filter-container">
+            <fieldset>
+              <legend>Genre</legend>
+              <ul
+                class="genre-filter-list flex flex-wrap items-center gap-2"
+              ></ul>
+            </fieldset>
+          </div>
+        </form>
+        <section class="random-results"></section>
       </section>
     </main>
     <footer><h2 class="test-center">Footer placeholder</h2></footer>

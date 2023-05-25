@@ -2,6 +2,94 @@ import "./style.css";
 import { FetchAPI } from "./components/fetchAPI";
 import { CreateDOM } from "./components/createDOM";
 
+// https://api.themoviedb.org/3/discover/movie?api_key=<key>&language=fr-FR&include_adult=false&with_genres=28&page=<randomNumber>
+
+// The results are paginated by 20 and you can access any page using "&page=" parameter, so you should generate a random number from 1-1000 then get the corresponding page (page = random_number DIV 20) and finally get the corresponding result from the downloaded page (item = random_number MOD 20).
+
+// Wenn ich auf movies klicke bekommen die Elemente die klass hidden
+// Wie greife ich auf die li-Elemente nach dem fetch zu?
+
+// ich muss code dringend refactorn
+
+function createFilterListItems(container: any, data: any, type: string) {
+  if (container instanceof HTMLElement) {
+    const genreFilterListItem = dom.createElement("li", {}, [type], container);
+    const genreFilterCheckbox = dom.createElement(
+      "input",
+      { id: `${data.id}`, type: "checkbox", value: data.name },
+      // ["hidden"],
+      ["hidden", "peer"],
+      genreFilterListItem
+    );
+    const genreFilterLabel = (dom.createElement(
+      "label",
+      { for: `${data.id}` },
+      [
+        "genre-filter-label",
+        "inline-flex",
+        "items-center",
+        "rounded-sm",
+        "border",
+        "border-black",
+        "border-2",
+        "hover:bg-red-50",
+        "peer-checked:bg-green-500",
+        "px-2",
+        "py-1",
+      ],
+      genreFilterListItem
+    ).textContent = data.name);
+
+    return genreFilterListItem;
+  }
+}
+
+const filterRadioButton = document.querySelectorAll(".filter-form input");
+console.log("BTN;", filterRadioButton);
+
+filterRadioButton.forEach((button: HTMLInputElement) => {
+  button.addEventListener("change", (event) => {
+    if ((event.target as HTMLInputElement).value === "movie") {
+      console.log((event.target as HTMLInputElement).value);
+    }
+    if ((event.target as HTMLInputElement).value === "tv") {
+      console.log((event.target as HTMLInputElement).value);
+    }
+  });
+});
+
+function buildGenreFilter() {
+  const genreFilterList = document.querySelector(".genre-filter-list");
+
+  interface Genre {
+    id: number;
+    name: string;
+  }
+
+  api.get(`genre/movie/list`).then((data) => {
+    console.log(data.genres);
+    data.genres.forEach((genre: Genre) => {
+      createFilterListItems(genreFilterList, genre, "movie");
+    });
+  });
+
+  api.get(`genre/tv/list`).then((data) => {
+    console.log(data.genres);
+    data.genres.forEach((genre: Genre) => {
+      createFilterListItems(genreFilterList, genre, "tv");
+    });
+  });
+}
+
+function getRandomMovie() {
+  // base api
+  // get https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}
+
+  //  `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=fr-FR&include_adult=false&with_genres=28&page=<randomNumber>`
+
+  buildGenreFilter();
+}
+
 const global = {
   currentPage: window.location.pathname,
   search: {
@@ -257,6 +345,10 @@ function basicRouting() {
       break;
     case "/search_results.html":
       console.log("search");
+      break;
+    case "/suggestion.html":
+      console.log("suggestion");
+      getRandomMovie();
       break;
   }
 
