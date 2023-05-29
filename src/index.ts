@@ -9,15 +9,6 @@ import {
   createFilterListItems,
 } from "./components/renderResults";
 
-// https://api.themoviedb.org/3/discover/movie?api_key=<key>&language=fr-FR&include_adult=false&with_genres=28&page=<randomNumber>
-
-// The results are paginated by 20 and you can access any page using "&page=" parameter, so you should generate a random number from 1-1000 then get the corresponding page (page = random_number DIV 20) and finally get the corresponding result from the downloaded page (item = random_number MOD 20).
-
-// Wenn ich auf movies klicke bekommen die Elemente die klass hidden
-// Wie greife ich auf die li-Elemente nach dem fetch zu?
-
-// ich muss code dringend refactorn
-
 const global = {
   currentPage: window.location.pathname,
   search: {
@@ -38,50 +29,92 @@ const api = new FetchAPI("https://api.themoviedb.org/3/", process.env.API_KEY);
 const dom = new CreateDOM();
 
 function randomIntFromInterval(min: number, max: number): number {
-  // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function refresh() {
+  window.location.reload();
+}
+
+async function triggerNewSuggestion() {
+  const newSuggestionButton = document.querySelector(".new-suggestion");
+
+  newSuggestionButton.addEventListener("click", refresh);
 }
 
 async function showSuggestions() {
   const queryString = window.location.search;
   const url = new URLSearchParams(queryString);
 
-  console.log(url);
-  console.log("TYPE", url.get("type"));
-  let tempArray;
-  tempArray = url.getAll("genre");
-  console.log("TEMP", tempArray.join(","));
-  console.log("GENRE", url.getAll("genre"));
-
-  console.log("LOG:", url.getAll("genre"));
+  global.suggestion.type = url.get("type");
   global.suggestion.genre = url.getAll("genre").join(",");
-
-  console.log("GLOBALGENRE:", global.suggestion.genre);
-  // console.log(global.search.term);
 
   const domContainer = document.querySelector(".suggestion-result-container");
 
   const rndIntForPage: number = randomIntFromInterval(1, 1000);
   const rndIntForResult: number = randomIntFromInterval(0, 19);
-  console.log("TSS", rndIntForResult);
-  console.log("RANDOMNUMBER:", rndIntForPage);
 
   const randomPage: number = rndIntForPage / 20;
   const randomResult: number = rndIntForResult % 20;
 
-  console.log("RANDOM-result:", randomResult);
+  // undefined id abfangen
 
-  // https://api.themoviedb.org/3/discover/movie?api_key=<key>&language=fr-FR&include_adult=false&with_genres=28&page=<randomNumber>
-
-  // The results are paginated by 20 and you can access any page using "&page=" parameter, so you should generate a random number from 1-1000 then get the corresponding page (page = random_number DIV 20) and finally get the corresponding result from the downloaded page (item = random_number MOD 20).
-
-  fetch(
-    ` https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&include_adult=false&with_genres=14&page=${randomPage}`
-  )
-    .then((res) => res.json())
+  api
+    .discover(global.suggestion.type, global.suggestion.genre, randomPage)
     .then((data) => {
-      console.log("SUGG:", data);
-      console.log("singleResult:", data.results[randomResult]);
+      const singleResult = data.results[randomResult];
+
+      if (
+        global.suggestion.type === "movie" ||
+        global.suggestion.type === "tv"
+      ) {
+        if (domContainer instanceof HTMLElement) {
+          const movieContainer = dom.createElement(
+            "div",
+            { "data-id": singleResult.id },
+            ["text-center", "m-2"],
+            domContainer
+          );
+          dom.createElement(
+            "img",
+            {
+              src: `https://image.tmdb.org/t/p/w500${singleResult.poster_path}`,
+            },
+            ["object-contain", "h-48", "w-96"],
+            movieContainer
+          );
+          dom.createElement(
+            "h2",
+            {},
+            ["text-xl"],
+            movieContainer
+          ).textContent = `${
+            global.suggestion.type === "movie"
+              ? singleResult.title
+              : singleResult.name
+          }`;
+          dom.createElement(
+            "h2",
+            {},
+            ["text-xl"],
+            movieContainer
+          ).textContent = `Release: ${
+            global.suggestion.type === "movie"
+              ? singleResult.release_date
+              : singleResult.first_air_date
+          }`;
+          dom.createElement(
+            "span",
+            {},
+            ["text-xl"],
+            movieContainer
+          ).textContent = `Rating: ${singleResult.vote_average.toFixed(
+            1
+          )} / 10`;
+        }
+      } else {
+        console.log("NOTHING");
+      }
     });
 }
 
@@ -98,7 +131,6 @@ function buildGenreFilter() {
   }
 
   api.get(`genre/movie/list`).then((data) => {
-    console.log("movieGenres:", data.genres);
     data.genres.forEach((genre: Genre) => {
       createFilterListItems(genreFilterList, genre, "movie");
     });
@@ -140,10 +172,6 @@ function buildGenreFilter() {
   genreFilterList.innerHTML = "";
 }
 
-function getRandomMovie() {
-  buildGenreFilter();
-}
-
 function highlightActiveLink() {
   const navLinks = document.querySelectorAll(".nav-link");
 
@@ -179,13 +207,15 @@ function basicRouting() {
       break;
     case "/suggestion.html":
       console.log("suggestion");
-      getRandomMovie();
+      // getRandomMovie();
+      buildGenreFilter();
       // searchSuggestion();
 
       break;
     case "/suggestion_results.html":
       console.log("suggestion_results");
       showSuggestions();
+      triggerNewSuggestion();
       break;
   }
 

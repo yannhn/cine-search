@@ -22,7 +22,12 @@ const global = {
 
 export function createFilterListItems(container: any, data: any, type: string) {
   if (container instanceof HTMLElement) {
-    const genreFilterListItem = dom.createElement("li", {}, [type], container);
+    const genreFilterListItem = dom.createElement(
+      "li",
+      {},
+      [type, "hidden"],
+      container
+    );
     dom.createElement(
       "input",
       {
