@@ -29,19 +29,38 @@
     <main>
       <section class="random m-4">
         <h2 class="text-center">Do not know what to watch?</h2>
-        <form action="./suggestion.html" class="filter-form">
-          <label for="">Movie</label>
-          <input type="radio" name="type" value="movie" />
-          <label for="">Shows</label>
-          <input type="radio" name="type" value="tv" />
+        <form
+          action="/suggestion_results.html"
+          class="filter-form flex flex-col gap-8"
+        >
+          <div
+            class="suggestion-type-container flex justify-between items-center"
+          >
+            <div>
+              <label for="">Movie</label>
+              <input type="radio" name="type" value="movie" />
+              <label for="">Shows</label>
+              <input type="radio" name="type" value="tv" />
+            </div>
+            <button
+              class="show-genre-filter bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              Genre filters
+            </button>
+          </div>
           <div class="genre-filter-container">
             <fieldset>
-              <legend>Genre</legend>
               <ul
                 class="genre-filter-list flex flex-wrap items-center gap-2"
               ></ul>
             </fieldset>
           </div>
+          <button
+            class="suggestion-button bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded text-right self-end"
+            type="submit"
+          >
+            Search
+          </button>
         </form>
         <section class="random-results"></section>
       </section>
