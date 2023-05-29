@@ -31,17 +31,15 @@ export class FetchAPI {
     }
   }
 
-  async post(url: string, body: string) {
+  async discover(type: string, genre: string, randomPage: number) {
     try {
-      const response = await fetch(this.baseUrl + url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        ` https://api.themoviedb.org/3/discover/${type}?api_key=${this.API_KEY}&language=en-US&include_adult=false&with_genres=${genre}&page=${randomPage}`
+      );
       const data = await response.json();
       return data;
     } catch (err) {
-      console.error("POST-Request error", err);
+      console.error("GET-Request error", err);
     }
   }
 }

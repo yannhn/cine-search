@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cine-search</title>
+    <script src="./bundle.js" defer></script>
+  </head>
+  <body class="dark">
+    <header
+      class="flex justify-between items-center p-4 text-slate-900 dark:text-white bg-white dark:bg-gray-800"
+    >
+      <h1 class="text-xl">LOGO PLACEHOLDER</h1>
+      <nav>
+        <ul class="flex gap-12 items-center">
+          <li>
+            <a class="nav-link" href="/">Movies</a>
+          </li>
+          <li>
+            <a class="nav-link" href="/tv_shows.html">Tv Shows</a>
+          </li>
+          <li>
+            <a class="nav-link" href="/suggestion.html">Suggestion</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="random m-4">
+        <h2 class="text-center">Do not know what to watch?</h2>
+        <form
+          action="/suggestion_results.html"
+          class="filter-form flex flex-col gap-8"
+        >
+          <div
+            class="suggestion-type-container flex justify-between items-center"
+          >
+            <div>
+              <label for="">Movie</label>
+              <input type="radio" name="type" value="movie" />
+              <label for="">Shows</label>
+              <input type="radio" name="type" value="tv" />
+            </div>
+            <button
+              class="show-genre-filter bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              Genre filters
+            </button>
+          </div>
+          <div class="genre-filter-container">
+            <fieldset>
+              <ul
+                class="genre-filter-list flex flex-wrap items-center gap-2"
+              ></ul>
+            </fieldset>
+          </div>
+          <button
+            class="suggestion-button bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded text-right self-end"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+        <section class="random-results"></section>
+      </section>
+    </main>
+    <footer><h2 class="test-center">Footer placeholder</h2></footer>
+  </body>
+</html>

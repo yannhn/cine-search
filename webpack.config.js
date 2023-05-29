@@ -71,6 +71,18 @@ module.exports = {
       chunks: ["index"],
       filename: "tv_shows_details.html",
     }),
+    new HtmlWebpackPlugin({
+      template: "./src/suggestion.html",
+      inject: true,
+      chunks: ["index"],
+      filename: "suggestion.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/suggestion_results.html",
+      inject: true,
+      chunks: ["index"],
+      filename: "suggestion_results.html",
+    }),
   ],
   output: {
     path: path.resolve(__dirname, "dist"),
