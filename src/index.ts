@@ -250,3 +250,10 @@ init(
   search,
   routingSwitch
 );
+
+const hamburgerButton = document.querySelector(".hamburger-button");
+console.log(hamburgerButton);
+
+hamburgerButton.addEventListener("click", () => {
+  console.log("clicked");
+});
