@@ -31,26 +31,29 @@
             />
           </svg>
         </button>
+        <div
+          class="hidden mobile-menu absolute left-0 top-0 bg-white dark:bg-gray-800 dark:text-white w-full h-full text-black text-5xl overflow-hidden z-50"
+        >
+          <div class="flex flex-col items-center justify-center p-6">
+            <button class="close-mobile-menu text-8xl self-end">&times;</button>
+            <ul class="gap-12 items-center">
+              <li class="hover:bg-gray-700 mt-4 mb-4">
+                <a class="font-semibold nav-link" href="/">Movies</a>
+              </li>
+              <li class="hover:bg-gray-700 mt-4 mb-4">
+                <a class="font-semibold nav-link" href="/tv_shows.html"
+                  >Tv Shows</a
+                >
+              </li>
+              <li class="hover:bg-gray-700 mt-4 mb-4">
+                <a class="font-semibold nav-link" href="/suggestion.html"
+                  >Suggestion</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
         <ul class="hidden sm:flex gap-12 items-center">
-          <li class="hover:bg-gray-700">
-            <a class="p-6 text-white font-semibold nav-link" href="/">Movies</a>
-          </li>
-          <li class="hover:bg-gray-700">
-            <a
-              class="p-6 text-white font-semibold nav-link"
-              href="/tv_shows.html"
-              >Tv Shows</a
-            >
-          </li>
-          <li class="hover:bg-gray-700">
-            <a
-              class="p-6 text-white font-semibold nav-link"
-              href="/suggestion.html"
-              >Suggestion</a
-            >
-          </li>
-        </ul>
-        <ul class="mobile-menu hidden gap-12 items-center">
           <li class="hover:bg-gray-700">
             <a class="p-6 text-white font-semibold nav-link" href="/">Movies</a>
           </li>
@@ -71,7 +74,7 @@
         </ul>
       </nav>
     </header>
-    <main>
+    <main class="dark:bg-gray-800 dark:text-white">
       <h2 class="text-center text-xl mb-4">NOW PLAYING</h2>
       <section
         class="now-playing-movies grid grid-cols-2 md:grid-cols-4"

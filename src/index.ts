@@ -251,10 +251,25 @@ init(
   routingSwitch
 );
 
-const hamburgerButton = document.querySelector(".hamburger-button");
-const mobileMenu = document.querySelector(".mobile-menu");
+const hamburgerButton = document.querySelector(
+  ".hamburger-button"
+) as HTMLElement;
+const closeHamburgerMenu = document.querySelector(
+  ".close-mobile-menu"
+) as HTMLElement;
+const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
 console.log(hamburgerButton);
+
+// add classes to body h-full overflow-hidden
 
 hamburgerButton.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
+  document.body.classList.add("h-full");
+  document.body.classList.add("overflow-hidden");
+});
+
+closeHamburgerMenu.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+  document.body.classList.remove("h-full");
+  document.body.classList.remove("overflow-hidden");
 });
