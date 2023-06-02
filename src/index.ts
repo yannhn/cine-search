@@ -252,8 +252,9 @@ init(
 );
 
 const hamburgerButton = document.querySelector(".hamburger-button");
+const mobileMenu = document.querySelector(".mobile-menu");
 console.log(hamburgerButton);
 
 hamburgerButton.addEventListener("click", () => {
-  console.log("clicked");
+  mobileMenu.classList.toggle("hidden");
 });

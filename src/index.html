@@ -17,7 +17,7 @@
       <nav>
         <button
           type="button"
-          class="hamburger-button text-gray-500 focus:text-white focus:outline-none hover:text-white"
+          class="hamburger-button text-gray-500 focus:text-white focus:outline-none hover:text-white sm:hidden"
         >
           <svg
             class="fill-current"
@@ -31,15 +31,42 @@
             />
           </svg>
         </button>
-        <ul class="flex gap-12 items-center">
-          <li>
-            <a class="nav-link" href="/">Movies</a>
+        <ul class="hidden sm:flex gap-12 items-center">
+          <li class="hover:bg-gray-700">
+            <a class="p-6 text-white font-semibold nav-link" href="/">Movies</a>
           </li>
-          <li>
-            <a class="nav-link" href="/tv_shows.html">Tv Shows</a>
+          <li class="hover:bg-gray-700">
+            <a
+              class="p-6 text-white font-semibold nav-link"
+              href="/tv_shows.html"
+              >Tv Shows</a
+            >
           </li>
-          <li>
-            <a class="nav-link" href="/suggestion.html">Suggestion</a>
+          <li class="hover:bg-gray-700">
+            <a
+              class="p-6 text-white font-semibold nav-link"
+              href="/suggestion.html"
+              >Suggestion</a
+            >
+          </li>
+        </ul>
+        <ul class="mobile-menu hidden gap-12 items-center">
+          <li class="hover:bg-gray-700">
+            <a class="p-6 text-white font-semibold nav-link" href="/">Movies</a>
+          </li>
+          <li class="hover:bg-gray-700">
+            <a
+              class="p-6 text-white font-semibold nav-link"
+              href="/tv_shows.html"
+              >Tv Shows</a
+            >
+          </li>
+          <li class="hover:bg-gray-700">
+            <a
+              class="p-6 text-white font-semibold nav-link"
+              href="/suggestion.html"
+              >Suggestion</a
+            >
           </li>
         </ul>
       </nav>
