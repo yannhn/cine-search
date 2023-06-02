@@ -1,7 +1,7 @@
 import "./style.css";
 import { FetchAPI } from "./components/fetchAPI";
 import { CreateDOM } from "./components/createDOM";
-import { init } from "./components/dom.tools";
+import { init, handleMobileMenu } from "./components/dom.tools";
 import {
   renderMultipleItems,
   renderSearchResults,
@@ -194,12 +194,10 @@ function basicRouting() {
       break;
     case "/movie_details.html":
       console.log("Movie details");
-
       displayDetails(".movie-details-container", "movie");
       break;
     case "/tv_shows_details.html":
       console.log("Show details");
-
       displayDetails(".tv-show-details-container", "tv");
       break;
     case "/search_results.html":
@@ -210,7 +208,6 @@ function basicRouting() {
       // getRandomMovie();
       buildGenreFilter();
       // searchSuggestion();
-
       break;
     case "/suggestion_results.html":
       console.log("suggestion_results");
@@ -242,39 +239,14 @@ const renderTrendingShows = renderMultipleItems(
 );
 const renderPopularShows = renderMultipleItems("tv/popular", ".popular-shows");
 
+const mobileMenu = handleMobileMenu();
+
 init(
   renderTrendingMovies,
   renderPopularMovies,
   renderTrendingShows,
   renderPopularShows,
   search,
-  routingSwitch
+  routingSwitch,
+  mobileMenu
 );
-
-const hamburgerButton = document.querySelector(
-  ".hamburger-button"
-) as HTMLElement;
-const closeHamburgerMenu = document.querySelector(
-  ".close-mobile-menu"
-) as HTMLElement;
-const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
-const header = document.querySelector("header") as HTMLElement;
-console.log(hamburgerButton);
-
-// add classes to body h-full overflow-hidden
-
-hamburgerButton.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-  document.body.classList.add("h-full");
-  document.body.classList.add("overflow-hidden");
-  header.classList.remove("sticky");
-  header.classList.remove("top-0");
-});
-
-closeHamburgerMenu.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-  document.body.classList.remove("h-full");
-  document.body.classList.remove("overflow-hidden");
-  header.classList.add("sticky");
-  header.classList.add("top-0");
-});
