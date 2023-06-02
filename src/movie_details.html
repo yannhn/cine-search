@@ -9,13 +9,15 @@
   </head>
   <body class="dark min-h-screen">
     <header
-      class="flex justify-between items-center p-4 text-slate-900 dark:text-white bg-white dark:bg-gray-800"
+      class="flex justify-between items-center p-4 text-slate-900 dark:text-white bg-white dark:bg-gray-900 sticky top-0"
     >
-      <h1 class="text-xl">LOGO PLACEHOLDER</h1>
+      <div>
+        <h1 class="text-xl">cine-search</h1>
+      </div>
       <nav>
         <button
           type="button"
-          class="hamburger-button text-gray-500 focus:text-white focus:outline-none hover:text-white"
+          class="hamburger-button text-gray-500 focus:text-white focus:outline-none hover:text-white sm:hidden"
         >
           <svg
             class="fill-current"
@@ -29,15 +31,49 @@
             />
           </svg>
         </button>
-        <ul class="flex gap-12 items-center">
+        <div
+          class="hidden mobile-menu fixed left-0 top-0 bg-white dark:bg-gray-900 dark:text-white w-full min-h-screen text-black text-5xl overflow-auto z-50"
+        >
+          <div class="flex flex-col items-center justify-center p-6">
+            <button class="close-mobile-menu text-8xl self-end">&times;</button>
+            <ul class="flex flex-col gap-12 items-start">
+              <li>
+                <a class="font-semibold nav-link" href="/">Movies</a>
+              </li>
+              <li>
+                <a class="font-semibold nav-link" href="/tv_shows.html"
+                  >Tv Shows</a
+                >
+              </li>
+              <li>
+                <a class="font-semibold nav-link" href="/suggestion.html"
+                  >Suggestion</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ul class="hidden sm:flex gap-12 items-center">
           <li>
-            <a class="nav-link" href="/">Movies</a>
+            <a
+              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              href="/"
+              >Movies</a
+            >
           </li>
           <li>
-            <a class="nav-link" href="/tv_shows.html">Tv Shows</a>
+            <a
+              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              href="/tv_shows.html"
+              >Tv Shows</a
+            >
           </li>
           <li>
-            <a class="nav-link" href="/suggestion.html">Suggestion</a>
+            <a
+              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              href="/suggestion.html"
+              >Suggestion</a
+            >
           </li>
         </ul>
       </nav>
