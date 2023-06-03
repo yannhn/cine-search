@@ -102,36 +102,6 @@
           class="search w-full max-w-xl flex flex-col items-center py-2 gap-4"
           action="/search_results.html"
         >
-<!-- 
-        dom.createElement(
-          "input",
-          {
-            id: `${data.id}-${type}`,
-            type: "checkbox",
-            value: data.id,
-            name: "genre",
-          },
-          // ["hidden"],
-          ["hidden", "peer"],
-          genreFilterListItem
-        );
-        dom.createElement(
-          "label",
-          { for: `${data.id}-${type}` },
-          [
-            "genre-filter-label",
-            "inline-flex",
-            "items-center",
-            "rounded-sm",
-            "border",
-            "border-black",
-            "border-2",
-            "hover:bg-red-50",
-            "peer-checked:bg-green-500",
-            "px-2",
-            "py-1",
-          ], -->
-
           <fieldset>
             <ul class="md:flex gap-4 flex-wrap justify-center grid grid-cols-2">
               <li class=" p-2 bg-gray-500 rounded">
@@ -186,9 +156,10 @@
           </div>
         </form>
       </section>
-
-      <h2 class="text-center text-xl mb-4">Popular</h2>
+      <section class="mt-12">
+        <h2 class="text-center text-xl mb-4  tracking-wider font-semibold">TRENDING MOVIES</h2>
       <section class="popular-movies grid grid-cols-2 md:grid-cols-4"></section>
+    </section>
     </main>
     <footer
       class="flex justify-between items-center p-4 text-slate-900 dark:text-white bg-white dark:bg-gray-900 sticky top-[100vh]"
