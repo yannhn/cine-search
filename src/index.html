@@ -56,21 +56,21 @@
         <ul class="hidden sm:flex gap-12 items-center">
           <li>
             <a
-              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              class="nav-link p-6  font-semibold hover:text-cyan-500"
               href="/"
               >Movies</a
             >
           </li>
           <li>
             <a
-              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              class="nav-link p-6  font-semibold hover:text-cyan-500"
               href="/tv_shows.html"
               >Tv Shows</a
             >
           </li>
           <li>
             <a
-              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              class="nav-link p-6  font-semibold hover:text-cyan-500"
               href="/suggestion.html"
               >Suggestion</a
             >
@@ -96,15 +96,45 @@
     </section>
     
   </div>
-      <h2 class="text-center text-xl mb-4">SEARCH</h2>
+ 
       <section class="search flex justify-center">
         <form
           class="search w-full max-w-xl flex flex-col items-center py-2 gap-4"
           action="/search_results.html"
         >
+<!-- 
+        dom.createElement(
+          "input",
+          {
+            id: `${data.id}-${type}`,
+            type: "checkbox",
+            value: data.id,
+            name: "genre",
+          },
+          // ["hidden"],
+          ["hidden", "peer"],
+          genreFilterListItem
+        );
+        dom.createElement(
+          "label",
+          { for: `${data.id}-${type}` },
+          [
+            "genre-filter-label",
+            "inline-flex",
+            "items-center",
+            "rounded-sm",
+            "border",
+            "border-black",
+            "border-2",
+            "hover:bg-red-50",
+            "peer-checked:bg-green-500",
+            "px-2",
+            "py-1",
+          ], -->
+
           <fieldset>
-            <ul class="flex gap-4">
-              <li>
+            <ul class="md:flex gap-4 flex-wrap justify-center grid grid-cols-2">
+              <li class=" p-2 bg-gray-500 rounded">
                 <label for="search-movie">Movie</label>
                 <input
                   type="radio"
@@ -114,11 +144,11 @@
                   checked
                 />
               </li>
-              <li>
+                  <li class=" p-2 bg-gray-500 rounded">
                 <label for="search-show">Show</label>
                 <input type="radio" id="search-show" name="type" value="tv" />
               </li>
-              <li>
+                <li class=" p-2 bg-gray-500 rounded">
                 <label for="search-person">Person</label>
                 <input
                   type="radio"
@@ -127,7 +157,7 @@
                   value="person"
                 />
               </li>
-              <li>
+              <li class=" p-2 bg-gray-500 rounded">
                 <label for="search-keyword">Keyword</label>
                 <input
                   type="radio"
@@ -145,20 +175,14 @@
             placeholder="Title"
             aria-label="Full name"
           />
-
           <div class="flex">
             <button
-              class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+              class="flex-shrink-0 bg-gray-500 hover:bg-gray-900  text-sm  text-white py-4 px-6 rounded"
               type="submit"
             >
-              Search
+            <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <button
-              class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
-              type="button"
-            >
-              Cancel
-            </button>
+        
           </div>
         </form>
       </section>
