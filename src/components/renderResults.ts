@@ -68,83 +68,17 @@ export function renderPreview(url: string, containerClass: string) {
   const domContainer = document.querySelector(
     containerClass
   ) as HTMLImageElement;
-  // methods as parameters
 
-  console.log("DOM", domContainer);
-
-  // domContainer.setAttribute(
-  //   "style",
-  //   "background-image: url('https://cdn.pixabay.com/photo/2023/05/15/08/52/flower-7994491_1280.jpg');"
-  // );
-
-  const rndIntForPage: number = randomIntFromInterval(1, 1000);
   const rndIntForResult: number = randomIntFromInterval(0, 19);
 
-  const randomPage: number = rndIntForPage / 20;
   const randomResult: number = rndIntForResult % 20;
 
-  //   style="
-  //   background-image: url('https://cdn.pixabay.com/photo/2023/05/15/08/52/flower-7994491_1280.jpg');
-  // "
-
   api.get(url).then((data) => {
-    console.log(data);
     const singleResult = data.results[randomResult];
     if (domContainer) {
-      domContainer.src = `https://image.tmdb.org/t/p/w500${singleResult.backdrop_path}`;
+      domContainer.src = `https://image.tmdb.org/t/p/w1280${singleResult.backdrop_path}`;
     }
     console.log("SINGLE-result:", singleResult);
-    // In andere Funktion auslagern!!
-    // data.results.forEach((result: any) => {
-    if (domContainer instanceof HTMLElement) {
-      dom.createElement(
-        "div",
-        {
-          "data-id": `${
-            global.currentPage === "/" || global.currentPage === "index.html"
-              ? `/movie_details.html?id=${singleResult.id}`
-              : `/tv_shows_details.html?id=${singleResult.id}`
-          }`,
-        },
-        ["bg-gradient-to-t", "from-cyan-500", "to-blue-500"],
-        domContainer
-      );
-
-      // domContainer.setAttribute(
-      //   "style",
-      //   `background-image: url('https://image.tmdb.org/t/p/w500${singleResult.backdrop_path}');`
-      // );
-      // dom.createElement("h2", {}, ["text-xl"], movieContainer).textContent =
-      //   result.title;
-
-      dom.createElement(
-        "img",
-        // { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
-        { src: `https://image.tmdb.org/t/p/w500${singleResult.backdrop_path}` },
-        // { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
-        ["w-full"],
-        domContainer
-      );
-      dom.createElement(
-        "div",
-        {},
-        [
-          "absolute",
-          "bottom-0",
-          "left-0",
-          "right-0",
-          "top-0",
-          "h-full",
-          "w-full",
-          "overflow-hidden",
-          "bg-black",
-          "bg-fixed",
-          "opacity-10",
-        ],
-        domContainer
-      );
-    }
-    // });
   });
 }
 
@@ -161,8 +95,7 @@ export function renderMultipleItems(url: string, containerClass: string) {
           ["text-center", "m-2"],
           domContainer
         );
-        // dom.createElement("h2", {}, ["text-xl"], movieContainer).textContent =
-        //   result.title;
+
         const detailsLink = dom.createElement(
           "a",
           {
@@ -176,6 +109,16 @@ export function renderMultipleItems(url: string, containerClass: string) {
           [],
           movieContainer
         );
+        dom.createElement(
+          "h2",
+          {},
+          ["text-xl"],
+          movieContainer
+        ).textContent = `${
+          global.currentPage === "/" || global.currentPage === "index.html"
+            ? result.title
+            : result.name
+        }`;
         dom.createElement(
           "img",
           { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
