@@ -1,5 +1,6 @@
 import { FetchAPI } from "./fetchAPI";
 import { CreateDOM } from "./createDOM";
+import { randomIntFromInterval } from "./dom.tools";
 
 const api = new FetchAPI("https://api.themoviedb.org/3/", process.env.API_KEY);
 const dom = new CreateDOM();
@@ -63,6 +64,24 @@ export function createFilterListItems(container: any, data: any, type: string) {
   }
 }
 
+export function renderPreview(url: string, containerClass: string) {
+  const domContainer = document.querySelector(
+    containerClass
+  ) as HTMLImageElement;
+
+  const rndIntForResult: number = randomIntFromInterval(0, 19);
+
+  const randomResult: number = rndIntForResult % 20;
+
+  api.get(url).then((data) => {
+    const singleResult = data.results[randomResult];
+    if (domContainer) {
+      domContainer.src = `https://image.tmdb.org/t/p/w1280${singleResult.backdrop_path}`;
+    }
+    console.log("SINGLE-result:", singleResult);
+  });
+}
+
 export function renderMultipleItems(url: string, containerClass: string) {
   const domContainer = document.querySelector(containerClass);
   // methods as parameters
@@ -76,8 +95,7 @@ export function renderMultipleItems(url: string, containerClass: string) {
           ["text-center", "m-2"],
           domContainer
         );
-        // dom.createElement("h2", {}, ["text-xl"], movieContainer).textContent =
-        //   result.title;
+
         const detailsLink = dom.createElement(
           "a",
           {
@@ -91,6 +109,16 @@ export function renderMultipleItems(url: string, containerClass: string) {
           [],
           movieContainer
         );
+        dom.createElement(
+          "h2",
+          {},
+          ["text-xl"],
+          movieContainer
+        ).textContent = `${
+          global.currentPage === "/" || global.currentPage === "index.html"
+            ? result.title
+            : result.name
+        }`;
         dom.createElement(
           "img",
           { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
