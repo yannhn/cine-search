@@ -92,10 +92,9 @@ export function renderMultipleItems(url: string, containerClass: string) {
         const movieContainer = dom.createElement(
           "div",
           { "data-id": result.id },
-          ["text-center", "m-2"],
+          ["m-2", "bg-gray-900", "p-2", "flex", "flex-col", "justify-between"],
           domContainer
         );
-
         const detailsLink = dom.createElement(
           "a",
           {
@@ -110,27 +109,46 @@ export function renderMultipleItems(url: string, containerClass: string) {
           movieContainer
         );
         dom.createElement(
+          "img",
+          { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
+          // { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
+          ["object-contain", "w-full"],
+          detailsLink
+        );
+        const cardInfoContainer = dom.createElement(
+          "div",
+          {},
+          ["justify-self-center", "mt-4"],
+          movieContainer
+        );
+        dom.createElement(
           "h2",
           {},
-          ["text-xl"],
-          movieContainer
+          ["text-xl", "text-bold", "font-semibold"],
+          cardInfoContainer
         ).textContent = `${
           global.currentPage === "/" || global.currentPage === "index.html"
             ? result.title
             : result.name
         }`;
-        dom.createElement(
-          "img",
-          { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
-          // { src: `https://image.tmdb.org/t/p/w500${result.poster_path}` },
-          ["object-contain", "h-48", "w-96"],
-          detailsLink
+        const ratingDiv = dom.createElement(
+          "div",
+          {},
+          ["flex", "gap-2"],
+          cardInfoContainer
         );
         dom.createElement(
           "span",
           {},
+          ["fa-solid", "fa-star", "self-center"],
+          ratingDiv
+        );
+
+        dom.createElement(
+          "span",
+          {},
           ["text-xl"],
-          movieContainer
+          ratingDiv
         ).textContent = `${result.vote_average.toFixed(1)} / 10`;
       }
     });

@@ -55,22 +55,20 @@
         </div>
         <ul class="hidden sm:flex gap-12 items-center">
           <li>
-            <a
-              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
-              href="/"
+            <a class="nav-link p-6 font-semibold hover:text-cyan-500" href="/"
               >Movies</a
             >
           </li>
           <li>
             <a
-              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              class="nav-link p-6 font-semibold hover:text-cyan-500"
               href="/tv_shows.html"
               >Tv Shows</a
             >
           </li>
           <li>
             <a
-              class="nav-link p-6 text-white font-semibold hover:text-cyan-500"
+              class="nav-link p-6 font-semibold hover:text-cyan-500"
               href="/suggestion.html"
               >Suggestion</a
             >
@@ -107,81 +105,76 @@
         </div>
       </section>
 
-      <section>
-        <h2 class="text-center text-xl mb-4">SEARCH</h2>
-        <section class="search flex justify-center">
-          <form
-            class="search w-full max-w-xl flex flex-col items-center py-2 gap-4"
-            action="/search_results.html"
-          >
-            <fieldset>
-              <ul class="flex gap-4">
-                <li>
-                  <label for="search-movie">Movie</label>
-                  <input
-                    type="radio"
-                    id="search-movie"
-                    name="type"
-                    value="movie"
-                    checked
-                  />
-                </li>
-                <li>
-                  <label for="search-show">Show</label>
-                  <input type="radio" id="search-show" name="type" value="tv" />
-                </li>
-                <li>
-                  <label for="search-person">Person</label>
-                  <input
-                    type="radio"
-                    id="search-person"
-                    name="type"
-                    value="person"
-                  />
-                </li>
-                <li>
-                  <label for="search-keyword">Keyword</label>
-                  <input
-                    type="radio"
-                    id="search-keyword"
-                    name="type"
-                    value="keyword"
-                  />
-                </li>
-              </ul>
-            </fieldset>
-            <input
-              class="search-input bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-teal-500 mr-3 py-1 px-2"
-              type="text"
-              name="search-query"
-              placeholder="Title"
-              aria-label="Full name"
-            />
-            <div class="flex">
-              <button
-                class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-                type="submit"
-              >
-                Search
-              </button>
-              <button
-                class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
-                type="button"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </section>
+      <section class="search flex justify-center">
+        <form
+          class="search w-full max-w-xl flex flex-col items-center py-2 gap-4"
+          action="/search_results.html"
+        >
+          <fieldset>
+            <ul class="md:flex gap-4 flex-wrap justify-center grid grid-cols-2">
+              <li class=" p-2 bg-gray-500 rounded">
+                <label for="search-movie">Movie</label>
+                <input
+                  type="radio"
+                  id="search-movie"
+                  name="type"
+                  value="movie"
+                  
+                />
+              </li>
+                  <li class=" p-2 bg-gray-500 rounded">
+                <label for="search-show">Show</label>
+                <input type="radio" id="search-show" name="type" value="tv" checked/>
+              </li>
+                <li class=" p-2 bg-gray-500 rounded">
+                <label for="search-person">Person</label>
+                <input
+                  type="radio"
+                  id="search-person"
+                  name="type"
+                  value="person"
+                />
+              </li>
+              <li class=" p-2 bg-gray-500 rounded">
+                <label for="search-keyword">Keyword</label>
+                <input
+                  type="radio"
+                  id="search-keyword"
+                  name="type"
+                  value="keyword"
+                />
+              </li>
+            </ul>
+          </fieldset>
+          <input
+            class="search-input bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-teal-500 mr-3 py-1 px-2"
+            type="text"
+            name="search-query"
+            placeholder="Title"
+            aria-label="Full name"
+          />
+          <div class="flex">
+            <button
+              class="flex-shrink-0 bg-gray-500 hover:bg-gray-900  text-sm  text-white py-4 px-6 rounded"
+              type="submit"
+            >
+            <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        
+          </div>
+        </form>
+      </section>
 
-        <h2 class="text-center text-xl mb-4">Popular</h2>
+      <section class="mt-12">
+        <h2 class="text-center text-xl mb-4  tracking-wider font-semibold">TRENDING SHOWS</h2>
         <section
           class="popular-shows grid grid-cols-2 md:grid-cols-4"
         ></section>
       </section>
+      </section>
     </main>
     <footer
-      class="flex justify-between items-center p-4 text-slate-900 dark:text-white bg-white dark:bg-gray-800 sticky top-[100vh]"
+      class="flex justify-between items-center p-4 text-slate-900 dark:text-white bg-white dark:bg-gray-900 sticky top-[100vh]"
     >
       <div>
         <svg
