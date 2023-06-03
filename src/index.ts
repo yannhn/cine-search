@@ -1,9 +1,14 @@
 import "./style.css";
 import { FetchAPI } from "./components/fetchAPI";
 import { CreateDOM } from "./components/createDOM";
-import { init, handleMobileMenu } from "./components/dom.tools";
+import {
+  init,
+  handleMobileMenu,
+  randomIntFromInterval,
+} from "./components/dom.tools";
 import {
   renderMultipleItems,
+  renderPreview,
   renderSearchResults,
   displayDetails,
   createFilterListItems,
@@ -27,10 +32,6 @@ const global = {
 
 const api = new FetchAPI("https://api.themoviedb.org/3/", process.env.API_KEY);
 const dom = new CreateDOM();
-
-function randomIntFromInterval(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 function refresh() {
   window.location.reload();
@@ -223,9 +224,9 @@ const routingSwitch = basicRouting();
 
 const search = renderSearchResults();
 
-const renderTrendingMovies = renderMultipleItems(
+const renderTrendingMovies = renderPreview(
   "trending/movie/week",
-  ".now-playing-movies"
+  ".preview-image-movie"
 );
 
 const renderPopularMovies = renderMultipleItems(
@@ -233,9 +234,9 @@ const renderPopularMovies = renderMultipleItems(
   ".popular-movies"
 );
 
-const renderTrendingShows = renderMultipleItems(
+const renderTrendingShows = renderPreview(
   "trending/tv/week",
-  ".now-playing-shows"
+  ".preview-image-shows"
 );
 const renderPopularShows = renderMultipleItems("tv/popular", ".popular-shows");
 

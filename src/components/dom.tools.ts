@@ -8,6 +8,10 @@ export function init(...callbacks: any[]) {
   }
 }
 
+export function randomIntFromInterval(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 export function handleMobileMenu() {
   const hamburgerButton = document.querySelector(
     ".hamburger-button"
