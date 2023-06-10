@@ -200,11 +200,19 @@ function basicRouting() {
       break;
     case "/movie_details.html":
       console.log("Movie details");
-      displayDetails(".movie-details-container", "movie");
+      displayDetails(
+        ".movie-details-container",
+        "movie",
+        ".preview-image-details-movie"
+      );
       break;
     case "/tv_shows_details.html":
       console.log("Show details");
-      displayDetails(".tv-show-details-container", "tv");
+      displayDetails(
+        ".tv-show-details-container",
+        "tv",
+        ".preview-image-details-show"
+      );
       break;
     case "/search_results.html":
       console.log("search");
@@ -229,7 +237,7 @@ const routingSwitch = basicRouting();
 
 const search = renderSearchResults();
 
-const renderTrendingMovies = renderPreview(
+const renderMoviePreview = renderPreview(
   "trending/movie/week",
   ".preview-image-movie"
 );
@@ -239,7 +247,7 @@ const renderPopularMovies = renderMultipleItems(
   ".popular-movies"
 );
 
-const renderTrendingShows = renderPreview(
+const renderShowPreview = renderPreview(
   "trending/tv/week",
   ".preview-image-shows"
 );
@@ -248,9 +256,9 @@ const renderPopularShows = renderMultipleItems("tv/popular", ".popular-shows");
 const mobileMenu = handleMobileMenu();
 
 init(
-  renderTrendingMovies,
+  renderMoviePreview,
   renderPopularMovies,
-  renderTrendingShows,
+  renderShowPreview,
   renderPopularShows,
   search,
   routingSwitch,

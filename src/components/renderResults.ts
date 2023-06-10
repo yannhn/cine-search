@@ -263,48 +263,81 @@ export async function renderSearchResults() {
   }
 }
 
-export async function displayDetails(container: any, type: string) {
+export async function displayDetails(
+  container: any,
+  type: string,
+  imageContainer: any
+) {
   const itemId = window.location.search.split("=")[1];
+
+  const imageBackdrop = document.querySelector(
+    imageContainer
+  ) as HTMLImageElement;
 
   const domContainer = document.querySelector(container);
 
   api.get(`${type}/${itemId}`).then((data) => {
-    console.log("MOVIE/TV - DATA", data);
+    console.log("MOVIE/TV - DATA:: DISPLAY DETAILS", data);
     if (domContainer instanceof HTMLElement) {
+      imageBackdrop.src = `https://image.tmdb.org/t/p/w1280${data.backdrop_path}`;
+
       const movieContainer = dom.createElement(
         "div",
         { "data-id": data.id },
-        ["text-center", "m-2"],
+        ["flex", "flex-col", "m-2"],
         domContainer
       );
 
-      dom.createElement("h2", {}, ["text-xl"], movieContainer).textContent =
-        data.title;
-      dom.createElement(
-        "img",
-        { src: `https://image.tmdb.org/t/p/w500${data.poster_path}` },
-        ["object-contain", "h-48", "w-96"],
+      const upperContainer = dom.createElement(
+        "div",
+        { "data-id": data.id },
+        ["flex", "justify-between", "items-center", "mb-4"],
         movieContainer
       );
 
+      const detailsLeft = dom.createElement(
+        "div",
+        { "data-id": data.id },
+        ["text-left", "flex", "flex-col"],
+        upperContainer
+      );
+      const detailsRight = dom.createElement(
+        "div",
+        { "data-id": data.id },
+        ["text-center"],
+        upperContainer
+      );
       dom.createElement(
         "h2",
         {},
-        ["text-xl"],
-        movieContainer
-      ).textContent = `Release date: ${data.release_date}`;
+        ["text-l", "font-semibold"],
+        detailsLeft
+      ).textContent = data.title;
+      dom.createElement(
+        "img",
+        { src: `https://image.tmdb.org/t/p/w1280${data.poster_path}` },
+        ["object-contain", "h-48", "w-full"],
+        detailsRight
+      );
+
+      dom.createElement("h2", {}, ["text-sm"], detailsLeft).textContent =
+        data.release_date
+          ? `Release date: ${data.release_date}`
+          : `First air date: ${data.first_air_date}`;
       dom.createElement(
         "span",
         {},
-        ["text-xl"],
-        movieContainer
+        ["text-sm"],
+        detailsLeft
       ).textContent = `Rating: ${data.vote_average.toFixed(1)} / 10`;
+      dom.createElement("h5", {}, ["italic"], movieContainer).textContent =
+        data.tagline;
       dom.createElement("p", {}, [], movieContainer).textContent =
         data.overview;
       const genreContainer = dom.createElement(
         "div",
         {},
-        ["m-8"],
+        ["mt-8", "mb-8", "border-t-2"],
         movieContainer
       );
 
@@ -318,18 +351,24 @@ export async function displayDetails(container: any, type: string) {
           [
             "inline-flex",
             "items-left",
-            "rounded-md",
-            "bg-gray-50",
+            "rounded-sm",
+            "bg-slate-500",
             "px-2",
             "py-1",
             "m-2",
             "text-xs",
             "font-medium",
-            "text-gray-600",
+            "text-white",
           ],
           genreList
         ).textContent = genre.name;
       });
+      const buttonsContainer = dom.createElement(
+        "div",
+        {},
+        ["text-left", "flex", "gap-2"],
+        detailsLeft
+      );
       dom.createElement(
         "a",
         {
@@ -337,16 +376,15 @@ export async function displayDetails(container: any, type: string) {
           target: "_blank",
         },
         [
-          "px-6",
-          "py-3",
+          "p-2",
           "text-blue-100",
           "no-underline",
-          "bg-blue-500",
-          "rounded",
+          "border",
+          "rounded-sm",
           "hover:bg-blue-600",
         ],
-        movieContainer
-      ).textContent = `See more details on imdb!`;
+        buttonsContainer
+      ).textContent = `imdb`;
       dom.createElement(
         "a",
         {
@@ -354,18 +392,96 @@ export async function displayDetails(container: any, type: string) {
           target: "_blank",
         },
         [
-          "px-6",
-          "py-3",
+          "p-2",
           "text-blue-100",
           "no-underline",
-          "bg-orange-500",
-          "rounded",
+          "border",
+          "rounded-sm",
           "hover:bg-orange-600",
         ],
+        buttonsContainer
+      ).textContent = `homepage`;
+      const infoContainer = dom.createElement(
+        "div",
+        {},
+        ["border-t-2"],
         movieContainer
-      ).textContent = `Official homepage`;
-      dom.createElement("h2", {}, ["mt-8"], movieContainer).textContent =
-        "MOVIE INFO FOR DETAILS";
+      );
+      dom.createElement("h2", {}, ["bt-2", "mt-8"], infoContainer).textContent =
+        "Details";
+      dom.createElement("h4", {}, ["text-xl"], infoContainer).textContent =
+        "Production countries";
+      const productionCountries = dom.createElement(
+        "ul",
+        {},
+        [],
+        infoContainer
+      );
+      data.production_countries.forEach((country: any) => {
+        dom.createElement(
+          "li",
+          {},
+          [
+            "inline-flex",
+            "items-left",
+            "rounded-sm",
+            "bg-slate-500",
+            "px-2",
+            "py-1",
+
+            "text-xs",
+            "font-medium",
+            "text-white",
+          ],
+          productionCountries
+        ).textContent = country.name;
+      });
+      dom.createElement("h4", {}, ["text-xl"], infoContainer).textContent =
+        "Production companies";
+      const productionCompanies = dom.createElement(
+        "ul",
+        {},
+        [],
+        infoContainer
+      );
+      data.production_companies.forEach((company: any) => {
+        dom.createElement(
+          "li",
+          {},
+          [
+            "inline-flex",
+            "items-left",
+            "rounded-sm",
+            "bg-slate-500",
+            "px-2",
+            "py-1",
+
+            "text-xs",
+            "font-medium",
+            "text-white",
+          ],
+          productionCompanies
+        ).textContent = company.name;
+      });
+      dom.createElement(
+        "h4",
+        {},
+        ["text-xl"],
+        infoContainer
+      ).textContent = `Budget ${data.budget}`;
+      dom.createElement(
+        "h4",
+        {},
+        ["text-xl"],
+        infoContainer
+      ).textContent = `Runtime ${data.runtime}`;
+
+      dom.createElement(
+        "h4",
+        {},
+        ["text-xl"],
+        infoContainer
+      ).textContent = `Runtime ${data.revenue}`;
     }
   });
 }
