@@ -428,7 +428,6 @@ export async function displayDetails(
             "bg-slate-500",
             "px-2",
             "py-1",
-
             "text-xs",
             "font-medium",
             "text-white",
@@ -455,7 +454,6 @@ export async function displayDetails(
             "bg-slate-500",
             "px-2",
             "py-1",
-
             "text-xs",
             "font-medium",
             "text-white",
